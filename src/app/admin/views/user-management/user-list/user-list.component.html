@@ -1,0 +1,57 @@
+<div class="search bg-white my-4 p-2 border rounded">
+    <form (ngSubmit)="performSearch()" class="grid grid-cols-6 gap-1">
+        <input type="text" class="bg-blue-50 border rounded px-2 " [(ngModel)]="firstNameFilter" name="firstName" placeholder="First Name">
+        <input type="text" class="bg-blue-50 border rounded px-2" [(ngModel)]="lastNameFilter" name="lastname" placeholder="Last Name">
+        <input type="text" class="bg-blue-50 border rounded px-2" [(ngModel)]="usernameFilter" name="userName" placeholder="Username">
+        <input type="text" class="bg-blue-50 border rounded px-2" [(ngModel)]="emailFilter" name="email" placeholder="Email">
+        <input type="text" class="bg-blue-50 border rounded px-2" [(ngModel)]="phoneNumberFilter" name="phoneNumber" placeholder="Phone Number">
+        <div class="flex justify-start">
+            <button type="submit" class="rounded bg-blue-600 text-white w-full pt-3 flex justify-center">
+                <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </button>
+        </div>     
+    </form>
+</div>
+
+
+<app-alert [show]="showSuccessAlert" [dismissible]="true">
+    <h6 class="text-lg font-semibold">
+        <i class="bi bi-check2-circle"></i>
+        Success
+    </h6>
+    <p>User Deleted</p>
+</app-alert>
+
+<app-alert [show]="showDangerAlert" [dismissible]="true" [type]="alertType">
+  <h6 class="text-lg font-semibold">
+      <i class="bi bi-bug"></i>
+      Failed
+  </h6>
+  <p>User delete failed!</p>
+</app-alert>
+
+<data-table [url]="useListApi" [setting]="dtSetting" [defaultFilters]="filterColumns"></data-table>
+
+<app-modal [show]="showDeleteModal" (closeModal)="onCloseModal($event)" (confirmation)="onConfirmDelete($event)">
+    <div class="sm:flex sm:items-start">
+        <div
+            class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+        </div>
+        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+            <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+                Remove User
+            </h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500">Are you sure you want to Delete?</p>
+            </div>
+        </div>
+    </div>
+</app-modal>
+

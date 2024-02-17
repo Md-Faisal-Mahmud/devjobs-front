@@ -1,0 +1,11 @@
+<div class="card p-5">
+    <h3 class="text-xl font-bold leading-none my-5">Number of Job Posts (Last 30 Days)</h3>
+    <div class="loading-animation text-center" *ngIf="isLoadingChartData">
+        <h4>Data Loading ...</h4>
+        <btn-spinner [show]="isLoadingChartData"></btn-spinner>
+    </div>
+    <div *ngIf="isChartDataLoadingFailed" class="loading-fail-message text-red-700 text-center">
+        <h3 class="mt-8">Data Loading Failed</h3>
+    </div>
+    <canvas id="dayWiseJobPost"></canvas>
+</div>

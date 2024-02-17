@@ -1,0 +1,14 @@
+{
+  "/v1/**": {
+    "target": "https://localhost:7162",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/v1/Account/*": {
+    "target": "https://localhost:7162",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

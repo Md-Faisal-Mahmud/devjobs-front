@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: devjobs-front-image
+    container_name: devjobs-front-container
+    ports:
+      - "8088:80"
