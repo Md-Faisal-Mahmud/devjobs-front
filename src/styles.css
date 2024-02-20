@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+    * {
+        font-family: 'Inter', sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Text color */
+    .text-light {
+        @apply text-slate-400
+    }
+
+    /* Text size */
+    .text-2xs {
+        font-size: 0.5rem !important;
+    }
+
+
+
+    /* buttons utility */
+    .btn {
+        @apply px-5 py-2 text-sm font-medium rounded-lg text-center transition-colors duration-300 border
+    }
+
+    button:disabled {
+        @apply opacity-80
+    }
+
+    /* button sizes */
+
+    .btn-xs {
+        @apply px-3 py-2 text-xs
+    }
+
+    .btn-sm {
+        @apply px-3 py-2 text-sm
+    }
+
+    .btn-lg {
+        @apply px-5 py-3 text-sm
+    }
+
+    .btn-xl {
+        @apply px-6 py-3.5 text-sm
+    }
+
+    /* fill buttons type */
+    .btn-text {
+        @apply transition duration-150 ease-in-out;
+    }
+
+    .btn-theme {
+        @apply bg-cornflowerBlue-500 border-cornflowerBlue-500 text-white hover:bg-cornflowerBlue-600 hover:border-cornflowerBlue-500
+    }
+
+    .btn-theme:focus {
+        @apply outline-none ring-2 bg-cornflowerBlue-600 ring-offset-1
+    }
+
+    .btn-primary {
+        @apply bg-cornflowerBlue-500 border-cornflowerBlue-500 text-white hover:bg-cornflowerBlue-600 hover:border-cornflowerBlue-600
+    }
+
+    .btn-info {
+        @apply bg-indigo-700 border-indigo-700 text-white hover:bg-indigo-800 hover:border-indigo-800
+    }
+
+    .btn-success {
+        @apply bg-green-700 border-green-700 text-white hover:bg-green-800 hover:border-green-800
+    }
+
+    .btn-danger {
+        @apply bg-red-700 border-red-700 text-white hover:bg-red-800 hover:border-red-800
+    }
+
+    .btn-warning {
+        @apply bg-yellow-600 border-yellow-600 text-white hover:bg-yellow-700 hover:border-yellow-700
+    }
+
+    .btn-secondary {
+        @apply bg-slate-700 border-slate-700 text-white hover:bg-slate-800 hover:border-slate-800
+    }
+
+    /* outline buttons type */
+
+    .btn-outline-primary {
+        @apply border bg-transparent border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white
+    }
+
+    .btn-outline-info {
+        @apply border bg-transparent border-indigo-700 text-indigo-700 hover:bg-indigo-700 hover:text-white
+    }
+
+    .btn-outline-success {
+        @apply border bg-transparent border-green-700 text-green-700 hover:bg-green-700 hover:text-white
+    }
+
+    .btn-outline-danger {
+        @apply border bg-transparent border-red-700 text-red-700 hover:bg-red-700 hover:text-white
+    }
+
+    .btn-outline-warning {
+        @apply border bg-transparent border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white
+    }
+
+    .btn-outline-secondary {
+        @apply border bg-transparent border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white
+    }
+
+    /* icon with button */
+    .btn-icon {
+        @apply inline-flex items-center
+    }
+
+
+    /* Card */
+    .card {
+        @apply py-2 px-4 mb-4 h-full bg-white rounded-xl shadow-md shadow-gray-200
+    }
+
+    .card-title {
+        @apply text-gray-900
+    }
+
+    /* Input */
+    input {
+        outline: none !important;
+        @apply h-10 transition-all duration-100 ease-in-out focus:ring-2 focus:ring-inset focus:ring-emerald-600
+    }
+
+    .form-group {
+        @apply flex flex-col gap-y-1 mb-3
+    }
+
+    .form-label {
+        @apply text-sm;
+    }
+
+    .form-control {
+        @apply py-2 px-3 text-sm rounded-lg border border-gray-100
+    }
+}
+
+/*Additional Global Css Overrides*/
+.notyf__toast {
+    max-width: 50em !important;
+}
+
+.notyf__toast .notyf__ripple {
+    height: 60em !important;
+    width: 60em !important;
+}
+
+.notyf__message {
+    font-size: 0.875rem !important;
+}

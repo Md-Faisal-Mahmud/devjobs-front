@@ -1,0 +1,128 @@
+<div [@pageTransition] class="card p-5">
+
+    <h3 class="text-xl font-bold">Update User</h3>
+
+    <form (ngSubmit)="submitForm()" [formGroup]="userForm" class="max-w-full mx-auto bg-white">
+        <div class="my-5">
+            <app-alert [show]="showSuccessAlert" [dismissible]="true">
+                <h6 class="text-lg font-semibold">
+                    <i class="bi bi-check2-circle"></i>
+                    Success
+                </h6>
+                <p>User Info Updated</p>
+            </app-alert>
+
+            <app-alert [show]="showDangerAlert" [dismissible]="true" [type]="alertType">
+                <h6 class="text-lg font-semibold">
+                    <i class="bi bi-bug"></i>
+                    Failed
+                </h6>
+                <p>{{errorMessage}}</p>
+            </app-alert>
+        </div>    
+        
+        <div class="image-input mb-5 p-2 border rounded">
+            <div class="mb-2 text-center col-span-2">
+              <div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 shadow-inset">
+                <img id="image" class="object-cover w-full h-32 rounded-full" [src]="imagePreview" />
+              </div>
+              <label for="ProfileImage" type="button"
+                class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1"
+                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                  <path
+                    d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                  <circle cx="12" cy="13" r="3" />
+                </svg>
+                Choose Profile Image
+              </label>
+              <input id="ProfileImage" formControlName="ProfileImage" accept="image/*" class="hidden" type="file" (change)="onSelectProfileImage($event)" />
+              <div *ngIf="userForm.get('ProfileImage')?.hasError('invalidFormat') && checkValidation" class="text-red-500 mt-2">Invalid Image</div>
+            </div>           
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <input type="hidden" name="id" />
+            
+            <div>
+                <label for="FirstName" class="block text-sm font-medium text-gray-600">First Name</label>
+                <input formControlName="FirstName" id="FirstName" type="text" class="mt-1 p-2 border w-full rounded" />
+                <div *ngIf="userForm.get('FirstName')?.hasError('required') && checkValidation" class="text-red-500 mt-2">First Name is required</div>
+            </div>
+
+            <div>
+                <label for="LastName" class="block text-sm font-medium text-gray-600">Last Name</label>
+                <input formControlName="LastName" id="LastName" type="text" class="mt-1 p-2 border w-full rounded" />
+                <div *ngIf="userForm.get('LastName')?.hasError('required') && checkValidation" class="text-red-500 mt-2">Last Name is required</div>
+            </div>
+
+            <div>
+                <label for="UserName" class="block text-sm font-medium text-gray-600">Username</label>
+                <input formControlName="UserName" id="UserName" type="text" class="mt-1 p-2 border w-full rounded" />
+                <div *ngIf="userForm.get('UserName')?.hasError('required') && checkValidation" class="text-red-500 mt-2"> Username is required</div>
+            </div>
+
+            <div>
+                <label for="PhoneNumber" class="block text-sm font-medium text-gray-600">Phone Number</label>
+                <input formControlName="PhoneNumber" id="PhoneNumber" type="tel" class="mt-1 p-2 border w-full rounded" />
+                <div *ngIf="userForm.get('PhoneNumber')?.hasError('required') && checkValidation" class="text-red-500 mt-2">Phone number is required</div>
+                <div *ngIf="userForm.get('PhoneNumber')?.hasError('pattern') && checkValidation" class="text-red-500 mt-2">Invalid phone number</div>
+            </div>
+
+            <div>
+                <label for="UserEmail" class="block text-sm font-medium text-gray-600">Email</label>
+                <input formControlName="UserEmail" id="UserEmail" type="email" class="mt-1 p-2 border w-full rounded" />
+                <div *ngIf="userForm.get('UserEmail')?.hasError('required') && checkValidation" class="text-red-500 mt-2"> Email is required</div>
+                <div *ngIf="userForm.get('UserEmail')?.hasError('email') && checkValidation" class="text-red-500 mt-2">Invalid email format</div>
+            </div>
+
+            <div>
+                <label for="LockoutEnd" class="block text-sm font-semibold text-gray-600">Lockout End Date</label>
+                <input type="text" id="LockoutEnd" formControlName="LockoutEnd" class="mt-1 p-2 border w-full rounded">
+            </div>
+
+            <div>
+                <label for="AccessFailedCount" class="block text-sm font-semibold text-gray-600">Access Failed Count</label>
+                <input type="number" id="AccessFailedCount" formControlName="AccessFailedCount" class="mt-1 p-2 border w-full rounded">
+                <div *ngIf="userForm.get('AccessFailedCount')?.hasError('required') && checkValidation" class="text-red-500 border">Access Failed Count is required</div>
+            </div>
+
+            <div *ngIf="userDetails">
+                <label for="PhoneNumberConfirmed" class="block text-sm font-semibold text-gray-600">Phone Number Confirmed</label>
+                <input type="checkbox" id="PhoneNumberConfirmed" formControlName="PhoneNumberConfirmed" [checked]="userDetails.phoneNumberConfirmed">
+              </div>
+
+            <div *ngIf="userDetails">
+                <label for="EmailConfirmed" class="block text-sm font-semibold text-gray-600">Email Confirmed</label>
+                <input type="checkbox" id="EmailConfirmed" formControlName="EmailConfirmed"  [checked]="this.userDetails.emailConfirmed">
+            </div>
+
+            <div *ngIf="userDetails">
+                <label for="TwoFactorEnabled" class="block text-sm font-semibold text-gray-600">Two Factor Enabled</label>
+                <input type="checkbox" id="TwoFactorEnabled" formControlName="TwoFactorEnabled"  [checked]="this.userDetails.twoFactorEnabled">
+            </div>
+
+            <div *ngIf="userDetails">
+                <label for="LockoutEnabled" class="block text-sm font-semibold text-gray-600">Lockout Enabled</label>
+                <input type="checkbox" id="LockoutEnabled" formControlName="LockoutEnabled" class="mt-1 p-2" [checked]="this.userDetails.lockoutEnabled">
+            </div>           
+        </div>
+
+        <div class="mt-6 text-center">
+            <button type="submit" [disabled]="isDisableCreateButton" class="bg-blue-500 text-white p-2 rounded">
+                <btn-spinner *ngIf="isDisableCreateButton" [show]="isDisableCreateButton"></btn-spinner>
+                <span>Update</span>
+            </button>
+        </div>
+    </form>
+    <a class="menu-item" class="inline-flex items-center border border-blue-600 text-blue-600 rounded px-4 py-2 hover:bg-blue-600 hover:text-white"
+        [routerLink]="commonServices.prepareRoute(appRoutes.Admin, adminRoutes.UserManagement, userManagementRoutes.List)"
+        routerLinkActive="active" ariaCurrentWhenActive="page">
+        <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>See List</span>
+    </a>
+</div>

@@ -1,0 +1,9 @@
+::ng-deep .animate-spin{
+    color:rgb(238, 0, 255);
+    width: 10%;
+    height: 10%;
+}
+.loading-fail-message{
+    font-weight: 800;
+    color: red;
+}

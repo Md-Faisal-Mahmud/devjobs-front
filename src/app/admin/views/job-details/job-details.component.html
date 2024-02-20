@@ -1,0 +1,198 @@
+<div class="container mx-auto pb-4">
+  <div class="bg-white rounded-md p-8">
+
+     <!-- job title -->
+     <h1 class="text-2xl font-bold mb-1 text-slate-600">{{ jobDetails?.JobTitle || 'Job title not found'}}</h1>
+    
+     <!-- company name  -->
+     <div class="flex items-center mb-6">
+       <div class="text-md">
+         <p class="font-bold mb-4 text-slate-600">{{ jobDetails?.Company?.Name || 'Company not found'}}</p>
+       </div>
+     </div>
+    
+     <!-- Experience Level, Job Track, Job Technologies -->
+     <div class="rounded-md ps-6 pb-8 ">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  
+           <div class="sm:col-span-1">
+            <p class="text-gray-700">Experience Level:</p>
+            <div *ngIf="experienceLevelsAnalysis && experienceLevelsAnalysis.length > 0">
+              <div class="flex flex-wrap gap-1 mt-2 ">
+                <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap "
+                  *ngFor="let jobTechnology of experienceLevelsAnalysis">
+                  {{jobTechnology}}
+                </button>
+              </div>
+            </div>
+            <div class="mt-2"  *ngIf="!experienceLevelsAnalysis || experienceLevelsAnalysis.length === 0">
+              <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap">
+                  Not available
+              </button>
+            </div>
+          </div>
+
+          <div class="col-span-1">
+            <p class="text-gray-700 mr-1">Job Track:</p>
+            <div *ngIf="jobTracksAnalysis && jobTracksAnalysis.length > 0">
+              <div class="flex flex-wrap gap-1 mt-2">
+                <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap" 
+                        *ngFor="let jobTrack of jobTracksAnalysis"> {{jobTrack}}
+                </button>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="!jobTracksAnalysis || jobTracksAnalysis.length === 0">
+              <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap">
+                  Not available
+              </button>
+            </div>
+          </div>
+  
+          <div class="sm:col-span-1">
+            <p class="text-gray-700">Job Technologies:</p>
+            <div *ngIf="jobTechnologiesAnalysis && jobTechnologiesAnalysis.length > 0">
+              <div class="flex flex-wrap gap-1 mt-2">
+                <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap"
+                  *ngFor="let jobTechnology of jobTechnologiesAnalysis">
+                  {{jobTechnology}}
+                </button>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="!jobTechnologiesAnalysis || jobTechnologiesAnalysis.length === 0">
+              <button class="rounded-s-full rounded-e-full text-sm bg-cornflowerBlue-500 text-white px-2 font-semibold min-w-64 whitespace-nowrap">
+                  Not available
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ <!-- summary card -->
+ <div class="rounded-md p-6 border-2 bg-gray-100 mt-2">
+  <h2 class="text-xl font-bold text-violet-900 mb-2">Summary</h2>            
+              
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 "> 
+    <div class="col-span-1 "> 
+      <p class="text-gray-700 mb-1">Vacancy: <strong>{{jobDetails?.NumberOfVacancies || '--'}}</strong></p>
+      <p class="text-gray-700 mb-1">Salary: <strong>{{prepareSalary()}}</strong></p>
+    </div>
+    <div class="col-span-1"> 
+      <p class="text-gray-700 mb-1">Age: <strong>{{prepareAge()}}</strong></p>
+      <p class="text-gray-700 mb-1">Experience: <strong>{{ prepareExperience() }}</strong></p>
+
+    </div>
+    <div class="col-span-1"> 
+      <p class="text-gray-700 mb-1">Location: <strong>{{prepareJobLocation()}}</strong></p>
+      <p class="text-gray-700 mb-1">Published: <strong>{{prepareDate()}}</strong></p>
+      </div>
+  </div>
+</div>
+      
+<!-- all -->
+<div class="mt-4 rounded-md  p-6 border-2 bg-white">
+  <!-- requirements -->
+  <div>
+    <h2 class="text-xl font-bold mb-2 text-violet-900">Requirements</h2>
+
+    <!-- edu -->
+    <div>
+      <h2 class="font-bold mb-2">Education</h2>
+      <ul class="list-disc pl-7">
+        <li *ngFor="let requirement of educationalRequirements">
+          {{ requirement }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- exp -->
+    <div>
+      <h2 class="font-bold mb-2 pt-2">Experience</h2>
+      <ul class="list-disc pl-7">
+        <li *ngFor="let requirement of experienceRequirements">
+          {{ requirement }}
+        </li>
+      </ul>
+    </div>
+    
+    <!-- adi exp -->
+    <div>
+      <h2 class="font-bold mb-2 pt-2">Additional Requirements</h2>
+      <ul class="list-disc pl-7">
+        <li *ngFor="let requirement of additionalJobRequirements">
+          {{ requirement }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JobDescription -->
+  <div>
+    <h2 class="border-t pt-3 border-gray-200 text-xl font-bold mb-2 mt-4  text-violet-900">Job Description</h2>
+    <ul class="list-disc pl-7">
+      <li *ngFor="let requirement of jobDescription">
+        {{ requirement }}
+      </li>
+    </ul>
+  </div>
+
+    <!-- OtherBenefits -->
+    <div class="mt-4 ">
+      <h2 class="border-t pt-3 text-xl font-bold mb-2 text-violet-900">Compensation & Other Benefits</h2>
+      <ul class="list-disc pl-7" *ngIf="otherBenefits && otherBenefits.length > 0; else noBenefits">
+        <li *ngFor="let benefits of otherBenefits">
+          {{ benefits }}
+        </li>
+      </ul>
+      <ng-template #noBenefits>
+        <p class="text-gray-700">No benefits available.</p>
+      </ng-template>
+    </div>
+
+    <!-- JobNature -->
+    <div class="mt-4">
+      <h2 class="border-t text-xl font-bold mb-2 pt-3 text-violet-900">Job Nature</h2>
+      <p class="text-gray-700">{{this.jobDetails?.JobNature}}</p>
+    </div>
+
+    <!-- Gender -->
+    <div class="mt-4">
+      <h2 class="border-t text-xl font-bold mb-2 pt-3 text-violet-900">Gender</h2>
+      <p class="text-gray-700">{{prepareGender()}}</p>
+    </div>
+
+    <!-- Company Information-->
+    <div class="mt-4">
+      <h2 class="border-t pt-3 text-xl font-bold mb-2 text-violet-900">Company Information</h2>
+      <p class="mb-1">{{ jobDetails?.Company?.Name || 'Company not found'}}</p>
+
+      <!-- Address -->
+      @if (jobDetails?.Company?.Address != null){
+        <h2 class="font-bold mt-2 mb-1">Address:</h2>
+        <p class="mb-3">{{jobDetails?.Company?.Address}}</p>
+      }
+
+      <!-- Website -->
+      @if (jobDetails?.Company?.Website != null){
+        <h2 class="font-bold mt-2 mb-1">Website:</h2>
+        <a class="text-cornflowerBlue-400" [href]="jobDetails?.Company?.Website" target="_blank" *ngIf="jobDetails?.Company?.Website">
+          {{ jobDetails?.Company?.Website}}
+        </a>
+      }
+
+      <!-- Business -->
+      @if (jobDetails?.Company?.BusinessType != null){
+        <h2 class="font-bold mt-3 mb-1">Business:</h2>
+        <p>{{jobDetails?.Company?.BusinessType}}</p>
+      }
+    </div>
+
+    <div class="pt-6 text-right">
+      <p class="flex items-center justify-end">
+        <span class="rounded-full bg-violet-100 text-violet-800 px-3 py-1 text-xs font-semibold mr-2">
+          From BdJobs on {{ prepareDateCreatedOn() }}
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+</div>
